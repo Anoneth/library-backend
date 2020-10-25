@@ -1,7 +1,11 @@
 package com.lab.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface LibraryUserRepository extends JpaRepository<LibraryUserRepository, Integer> {
+import com.lab.data.LibraryUser;
+
+@Repository
+public interface LibraryUserRepository extends JpaRepository<LibraryUser, Integer> {
 
 }
