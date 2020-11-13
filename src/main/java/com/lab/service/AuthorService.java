@@ -1,6 +1,7 @@
 package com.lab.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,10 @@ public class AuthorService {
 	
 	public List<Author> findAll() {
 		return authorRepository.findAll();
+	}
+	
+	public Optional<Author> findAll(int id) {
+		return authorRepository.findById(id);
 	}
 
 }
