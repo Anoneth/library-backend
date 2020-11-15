@@ -10,9 +10,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@EnableWebSecurity
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+@Configuration
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -30,31 +32,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.cors().and()
 			.httpBasic().and().authorizeRequests()
-			.antMatchers("/index.html", "/", "/home", "/login").authenticated()
+			.antMatchers(HttpMethod.GET, "/user**").hasRole("USER")
+			.antMatchers(HttpMethod.GET, "/authors**").hasRole("USER")
 			.antMatchers(HttpMethod.POST, "/authors.get**").hasRole("USER")
-			.antMatchers(HttpMethod.POST, "/authors.add**").hasRole("EMPLOYEE")
-			.antMatchers(HttpMethod.POST, "/authors.edit**").hasRole("EMPLOYEE")
-			.antMatchers(HttpMethod.POST, "/authors.remove**").hasRole("EMPLOYEE")
+			.antMatchers(HttpMethod.POST, "/authors.add**").hasRole("USER")
+			.antMatchers(HttpMethod.POST, "/authors.edit**").hasRole("USER")
+			.antMatchers(HttpMethod.POST, "/authors.remove**").hasRole("USER")
 			.and().csrf().disable()
 			.formLogin().disable();
     }
     
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        return source;
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+    	registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods("*");
     }
-
-    /*@Bean
-    public UserDetailsService userDetailsService() {
-        //ok for demo
-        User.UserBuilder users = User.withDefaultPasswordEncoder();
-
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(users.username("user").password("password").roles("USER").build());
-        manager.createUser(users.username("admin").password("password").roles("USER", "ADMIN").build());
-        return manager;
-    }*/
-
 }

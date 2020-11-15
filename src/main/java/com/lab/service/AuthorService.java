@@ -23,8 +23,28 @@ public class AuthorService {
 		return authorRepository.findAll();
 	}
 	
-	public Optional<Author> findAll(int id) {
-		return authorRepository.findById(id);
+	public Author findById(int id) {
+		return authorRepository.findById(id).orElse(null);
 	}
+	
+	public Author add(Author author) {
+		Author res = authorRepository.save(author);
+		return res;
+	}
+	
+	public Author update(Author author) {
+		Author tmp = authorRepository.findById(author.getAuthorID()).orElse(null);
+		if (tmp != null) {
+			tmp.setAuthorBDate(author.getAuthorBDate());
+			tmp.setAuthorName(author.getAuthorName());
+			tmp = authorRepository.save(tmp);
+		}
+		return tmp;
+	}
+	
+	public void remove(int id) {
+		authorRepository.deleteById(id);
+	}
+	
 
 }
