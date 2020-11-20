@@ -1,5 +1,8 @@
 package com.lab.service;
 
+import java.math.BigInteger;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +24,19 @@ public class AuthorService {
 	
 	public List<Author> findAll() {
 		return authorRepository.findAll();
+	}
+	
+	public List<Author> findAllWithCount() {
+		List<Author> result = new ArrayList<Author>();
+		List<Object[]> authors = authorRepository.findAllWithCount();
+		for (int i = 0; i < authors.size(); i++) {
+			result.add(new Author());
+			result.get(i).setAuthorID((int)authors.get(i)[0]);
+			result.get(i).setAuthorName((String)authors.get(i)[1]);
+			result.get(i).setAuthorBDate((Date)authors.get(i)[2]);
+			result.get(i).setBookCount((BigInteger)authors.get(i)[3]);
+		}
+		return result;
 	}
 	
 	public Author findById(int id) {

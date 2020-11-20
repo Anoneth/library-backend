@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,26 +30,26 @@ public class AuthorController {
 	
 	@GetMapping("/authors")
 	public List<Author> getAll() {
-		return authorService.findAll();
+		return authorService.findAllWithCount();
 	}
 	
 	@GetMapping("/authors/{id}")
-	public Author getById(int id) {
+	public Author getById(@PathVariable int id) {
 		return authorService.findById(id);
 	}
 	
 	@PostMapping("/authors")
-	public Author edit(Author author) {
+	public Author edit(@RequestBody Author author) {
 		return authorService.update(author);
 	}
 	
 	@PutMapping("/authors")
-	public Author update(Author author) {
+	public Author update(@RequestBody Author author) {
 		return authorService.update(author);
 	}
 	
 	@DeleteMapping("/authors/{id}")
-	public void delete(int id) {
+	public void delete(@PathVariable int id) {
 		authorService.remove(id);
 	}
 	
