@@ -2,18 +2,13 @@ package com.lab.data;
 
 import java.math.BigInteger;
 import java.sql.Date;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "author")
@@ -29,7 +24,7 @@ public class Author {
 	@Column(name = "authorBDate")
 	private Date authorBDate;
 	
-	//@Column(name = "book_count")
+	@Transient
 	private int bookCount;
 	/*@ManyToMany(cascade = { CascadeType.ALL})
 	@JoinTable(

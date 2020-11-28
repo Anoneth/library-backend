@@ -21,5 +21,13 @@ public class CopyOfTheBookService {
 	public List<CopyOfTheBook> findAll() {
 		return copyOfTheBookRepository.findAll();
 	}
+	
+	public CopyOfTheBook save(CopyOfTheBook copyOfTheBook) {
+		return copyOfTheBookRepository.save(copyOfTheBook);
+	}
+	
+	public void delete(int id) {
+		copyOfTheBookRepository.deleteById(id);
+	}
 
 }

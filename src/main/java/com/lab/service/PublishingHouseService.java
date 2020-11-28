@@ -21,4 +21,12 @@ public class PublishingHouseService {
 	public List<PublishingHouse> findAll() {
 		return publishingHouseRepository.findAll();
 	}
+	
+	public PublishingHouse save(PublishingHouse publishingHouse) {
+		return publishingHouseRepository.save(publishingHouse);
+	}
+	
+	public void delete(int id) {
+		publishingHouseRepository.deleteById(id);
+	}
 }

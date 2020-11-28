@@ -20,7 +20,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter implement
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.inMemoryAuthentication()
-                .withUser("user").password("{noop}password").roles("USER")
+                .withUser("user").password("{noop}pass").roles("USER")
                 .and()
                 .withUser("admin").password("{noop}password").roles("USER", "ADMIN");
 
@@ -32,12 +32,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter implement
 		http
 			.cors().and()
 			.httpBasic().and().authorizeRequests()
-			.antMatchers(HttpMethod.GET, "/user**").hasRole("USER")
-			.antMatchers(HttpMethod.GET, "/authors**").hasRole("USER")
-			.antMatchers(HttpMethod.POST, "/authors.get**").hasRole("USER")
-			.antMatchers(HttpMethod.POST, "/authors.add**").hasRole("USER")
-			.antMatchers(HttpMethod.POST, "/authors.edit**").hasRole("USER")
-			.antMatchers(HttpMethod.POST, "/authors.remove**").hasRole("USER")
+			.antMatchers(HttpMethod.GET, "/**").hasAnyRole("USER")
+			.antMatchers(HttpMethod.POST, "/**").hasAnyRole("USER")
+			.antMatchers(HttpMethod.DELETE, "/**").hasAnyRole("USER")
+			.antMatchers(HttpMethod.PUT, "/**").hasAnyRole("USER")
 			.and().csrf().disable()
 			.formLogin().disable();
     }

@@ -5,7 +5,7 @@ import java.sql.Date;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "libraryuser")
+@Table(name = "library_user")
 public class LibraryUser {
 	
 	@Id
@@ -19,10 +19,13 @@ public class LibraryUser {
 	private long userPassport;
 	
 	@Column(name = "userbdate")
-	private Date userBDate;
+	private Date userDate;
 	
 	@Column(name = "useraddress")
 	private String userAddress;
+	
+	@Transient
+	private int count;
 
 	public int getUserID() {
 		return userID;
@@ -36,12 +39,16 @@ public class LibraryUser {
 		return userPassport;
 	}
 
-	public Date getUserBDate() {
-		return userBDate;
+	public Date getUserDate() {
+		return userDate;
 	}
 
 	public String getUserAddress() {
 		return userAddress;
+	}
+	
+	public int getCount() {
+		return count;
 	}
 
 	public void setUserID(int userID) {
@@ -56,12 +63,16 @@ public class LibraryUser {
 		this.userPassport = userPassport;
 	}
 
-	public void setUserBDate(Date userBDate) {
-		this.userBDate = userBDate;
+	public void setUserDate(Date userBDate) {
+		this.userDate = userBDate;
 	}
 
 	public void setUserAddress(String userAddress) {
 		this.userAddress = userAddress;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 }

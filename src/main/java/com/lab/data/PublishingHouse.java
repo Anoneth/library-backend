@@ -3,7 +3,7 @@ package com.lab.data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "publishinghouse")
+@Table(name = "publishing_house")
 public class PublishingHouse {
 	
 	@Id
@@ -15,6 +15,9 @@ public class PublishingHouse {
 	
 	@Column(name = "phaddress")
 	private String phAddress;
+	
+	@Transient
+	private int count;
 
 	public int getPhID() {
 		return phID;
@@ -27,6 +30,10 @@ public class PublishingHouse {
 	public String getPhAddress() {
 		return phAddress;
 	}
+	
+	public int getCount() {
+		return count;
+	}
 
 	public void setPhID(int phID) {
 		this.phID = phID;
@@ -38,6 +45,10 @@ public class PublishingHouse {
 
 	public void setPhAddress(String phAddress) {
 		this.phAddress = phAddress;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 }

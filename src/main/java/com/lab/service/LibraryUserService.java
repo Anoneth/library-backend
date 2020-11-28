@@ -21,5 +21,13 @@ public class LibraryUserService {
 	public List<LibraryUser> findAll() {
 		return libraryUserRepository.findAll();
 	}
+	
+	public LibraryUser save(LibraryUser libraryUser) {
+		return libraryUserRepository.save(libraryUser);
+	}
+	
+	public void delete(int id) {
+		libraryUserRepository.deleteById(id);
+	}
 
 }

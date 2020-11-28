@@ -16,6 +16,9 @@ public class Book {
 	@Column(name = "bookgenre")
 	private String bookGenre;
 	
+	@Transient
+	private int[] authors;
+	
 	public int getBookID() {
 		return bookID;
 	}
@@ -28,6 +31,10 @@ public class Book {
 		return bookGenre;
 	}
 	
+	public int[] getBookAuthors() {
+		return authors;
+	}
+	
 	public void setBookID(int bookID) {
 		this.bookID = bookID;
 	}
@@ -38,5 +45,9 @@ public class Book {
 	
 	public void setBookGenre(String bookGenre) {
 		this.bookGenre = bookGenre;
+	}
+	
+	public void setBookAuthors(int[] authors) {
+		this.authors = authors;
 	}
 }

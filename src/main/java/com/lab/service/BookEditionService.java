@@ -21,5 +21,13 @@ public class BookEditionService {
 	public List<BookEdition> findAll() {
 		return bookEditionRepository.findAll();
 	}
+	
+	public BookEdition save(BookEdition bookEdition) {
+		return bookEditionRepository.save(bookEdition);
+	}
+	
+	public void delete(int id) {
+		bookEditionRepository.deleteById(id);
+	}
 
 }

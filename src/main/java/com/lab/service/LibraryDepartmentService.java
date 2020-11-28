@@ -21,5 +21,12 @@ public class LibraryDepartmentService {
 	public List<LibraryDepartment> findAll() {
 		return libraryDepartmentRepository.findAll();
 	}
-
+	
+	public LibraryDepartment save(LibraryDepartment libraryDepartment) {
+		return libraryDepartmentRepository.save(libraryDepartment);
+	}
+	
+	public void delete(int id) {
+		libraryDepartmentRepository.deleteById(id);
+	}
 }

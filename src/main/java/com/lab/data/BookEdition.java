@@ -3,7 +3,7 @@ package com.lab.data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "bookedition")
+@Table(name = "book_edition")
 public class BookEdition {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,16 +12,17 @@ public class BookEdition {
 	@Column(unique = true)
 	private String ISBN;
 	
-	@ManyToOne(targetEntity = Book.class)
-	@JoinColumn(name = "bookid")
-	private Book book;
+	@Column(name = "bookid")
+	private int bookID;
 	
-	@ManyToOne(targetEntity = PublishingHouse.class)
-	@JoinColumn(name = "phid")
-	private PublishingHouse publishingHouse;
+	@Column(name = "phID")
+	private int phID;
 	
 	@Column(name = "beyear")
 	private int beYear;
+	
+	@Transient
+	private int count;
 
 	public int getBeID() {
 		return beID;
@@ -31,16 +32,20 @@ public class BookEdition {
 		return ISBN;
 	}
 
-	public Book getBook() {
-		return book;
+	public int getBookID() {
+		return bookID;
 	}
 
-	public PublishingHouse getPublishingHouse() {
-		return publishingHouse;
+	public int getPhID() {
+		return phID;
 	}
 
 	public int getBeYear() {
 		return beYear;
+	}
+	
+	public int getCount() {
+		return count;
 	}
 
 	public void setBeID(int beID) {
@@ -51,15 +56,19 @@ public class BookEdition {
 		ISBN = iSBN;
 	}
 
-	public void setBook(Book book) {
-		this.book = book;
+	public void setBookId(int bookID) {
+		this.bookID = bookID;
 	}
 
-	public void setPublishingHouse(PublishingHouse publishingHouse) {
-		this.publishingHouse = publishingHouse;
+	public void setPhID(int phID) {
+		this.phID = phID;
 	}
 
 	public void setBeYear(int beYear) {
 		this.beYear = beYear;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
 	}
 }
