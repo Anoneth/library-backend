@@ -1,5 +1,6 @@
 package com.lab.service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,6 +43,7 @@ public class BookService {
 			} else {
 				book.setBookAuthors(null);
 			}
+			book.setCount(((BigInteger)o[4]).intValue());
 			books.add(book);
 		}
 		return books;
@@ -61,7 +63,7 @@ public class BookService {
 	
 	public Book save(Book book) {
 		Book result = bookRepository.save(book);
-		updateAuthorsById(book.getBookID(), book.getBookAuthors());
+		updateAuthorsById(result.getBookID(), book.getBookAuthors());
 		result.setBookAuthors(book.getBookAuthors());
 		return result;
 	}

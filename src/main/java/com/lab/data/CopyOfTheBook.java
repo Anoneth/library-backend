@@ -8,19 +8,17 @@ public class CopyOfTheBook {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "inventorynumber")
 	private int inventoryNumber;
 	
 	@Column(name = "isbn")
 	private String isbn;
 	
-	@Column(name = "departCode")
+	@Column(name = "departcode")
 	private int departCode;
 	
 	@Column(name = "userid", nullable = true)
 	private Integer userID;
-	
-	@Transient
-	private int count;
 
 	public int getInventoryNumber() {
 		return inventoryNumber;
@@ -37,10 +35,6 @@ public class CopyOfTheBook {
 	public Integer getUserID() {
 		return userID;
 	}
-	
-	public int count() {
-		return count;
-	}
 
 	public void setInventoryNumber(int inventoryNumber) {
 		this.inventoryNumber = inventoryNumber;
@@ -56,9 +50,5 @@ public class CopyOfTheBook {
 
 	public void setUserID(Integer userID) {
 		this.userID = userID;
-	}
-	
-	public void setCount(int count) {
-		this.count = count;
 	}
 }

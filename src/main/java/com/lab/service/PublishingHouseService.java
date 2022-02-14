@@ -1,5 +1,8 @@
 package com.lab.service;
 
+import java.math.BigInteger;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +22,16 @@ public class PublishingHouseService {
 	}
 	
 	public List<PublishingHouse> findAll() {
-		return publishingHouseRepository.findAll();
+		List<PublishingHouse> result = new ArrayList<PublishingHouse>();
+		List<Object[]> phs = publishingHouseRepository.getAll();
+		for (int i = 0; i < phs.size(); i++) {
+			result.add(new PublishingHouse());
+			result.get(i).setPhID((int)phs.get(i)[0]);
+			result.get(i).setPhName((String)phs.get(i)[1]);
+			result.get(i).setPhAddress((String)phs.get(i)[2]);
+			result.get(i).setCount(((BigInteger)phs.get(i)[3]).intValue());
+		}
+		return result;
 	}
 	
 	public PublishingHouse save(PublishingHouse publishingHouse) {

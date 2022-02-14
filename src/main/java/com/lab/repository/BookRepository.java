@@ -15,8 +15,9 @@ import com.lab.data.Book;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {	
 	
-	@Query(value = "SELECT b.bookID, bookName, bookGenre, string_agg(cast(authorID as text), ',') "
+	@Query(value = "SELECT b.bookID, bookName, bookGenre, string_agg(cast(authorID as text), ','), count(be.isbn) "
 			+ "FROM book b LEFT JOIN author_book ab ON b.bookID = ab.bookID "
+			+ "LEFT JOIN book_edition be ON b.bookID = be.bookID "
 			+ "GROUP BY b.bookID", nativeQuery = true)
 	public List<Object[]> findAllWithAuthors();
 	

@@ -8,6 +8,7 @@ public class LibraryDepartment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "departcode")
 	private int departCode;
 	
 	@Column(name = "departname", unique = true)

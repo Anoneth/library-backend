@@ -1,5 +1,7 @@
 package com.lab.service;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,19 @@ public class BookEditionService {
 	}
 	
 	public List<BookEdition> findAll() {
-		return bookEditionRepository.findAll();
+		List<BookEdition> result = new ArrayList<BookEdition>();
+		List<Object[]> response = bookEditionRepository.getAll();
+		for (Object[] o : response) {
+			BookEdition be = new BookEdition();
+			be.setBeID((int)o[0]);
+			be.setISBN(o[1].toString());
+			be.setBookId((int)o[2]);
+			be.setPhID((int)o[3]);
+			be.setBeYear((int)o[4]);
+			be.setCount(((BigInteger)o[5]).intValue());
+			result.add(be);
+		}
+		return result;
 	}
 	
 	public BookEdition save(BookEdition bookEdition) {

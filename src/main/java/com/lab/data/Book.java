@@ -19,6 +19,9 @@ public class Book {
 	@Transient
 	private int[] authors;
 	
+	@Transient
+	private int count;
+	
 	public int getBookID() {
 		return bookID;
 	}
@@ -35,6 +38,10 @@ public class Book {
 		return authors;
 	}
 	
+	public int getCount() {
+		return count;
+	}
+	
 	public void setBookID(int bookID) {
 		this.bookID = bookID;
 	}
@@ -49,5 +56,9 @@ public class Book {
 	
 	public void setBookAuthors(int[] authors) {
 		this.authors = authors;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
 	}
 }
